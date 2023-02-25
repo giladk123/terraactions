@@ -150,7 +150,7 @@ jobs:
 
   apply:
     name: Terraform apply
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
     needs: [ plan ]
     runs-on: ubuntu-latest
 #   environment: dev
