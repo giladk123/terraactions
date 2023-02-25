@@ -64,4 +64,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: tf-plan
-          path: .main/out.tfplan
+          path: out.tfplan
