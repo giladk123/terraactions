@@ -12,7 +12,17 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    defaults:
+     run:
+       shell: bash
+       working-directory: ./main
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.3.9
       - name: 'Az CLI login using OIDC'
         uses: azure/login@v1
         with:
