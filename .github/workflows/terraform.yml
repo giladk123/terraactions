@@ -150,6 +150,7 @@ jobs:
 
   apply:
     name: Terraform apply
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: [ plan ]
     runs-on: ubuntu-latest
 #   environment: dev
