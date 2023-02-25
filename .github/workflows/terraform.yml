@@ -153,7 +153,7 @@ jobs:
 
   apply:
     name: Terraform apply
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && [ $DESTROY == "true" ]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && $DESTROY == "true"
     needs: [ plan ]
     runs-on: ubuntu-latest
 #   environment: dev
