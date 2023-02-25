@@ -12,11 +12,6 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    defaults:
-       run:
-        shell: bash
-        working-directory: ./main
-    
     steps:
       - name: 'Az CLI login using OIDC'
         uses: azure/login@v1
