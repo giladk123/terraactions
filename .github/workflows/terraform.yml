@@ -12,9 +12,7 @@ on:
   pull_request:
     paths:
     - main/**
-  push:
-    branches:
-      - main
+  
 
 env:
   tf_actions_working_dir: main
