@@ -10,7 +10,7 @@ variable "business_unit" {
 variable "environment" {
   description = "Environment Name"
   type = string
-  default = "stage"
+  default = "prod"
 }
 # 3. Resource Group Name
 variable "resource_group_name" {
