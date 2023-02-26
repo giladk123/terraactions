@@ -12,7 +12,6 @@ on:
   pull_request:
     paths:
     - main/**
-  
 
 env:
   tf_actions_working_dir: main
@@ -25,7 +24,7 @@ jobs:
   plan:
     name: Terraform plan
     runs-on: ubuntu-latest
-#   environment: tfplan
+    environment: tfplan
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
@@ -139,22 +138,21 @@ jobs:
         name: tf-plan
         path: ${{ env.tf_actions_working_dir }}/out.tfplan
 
-#    - name: Publish plan as a status
-#      if: github.event_name == 'pull_request'
-#      uses: Sibz/github-status-action@v1.1.6
-#      with:
-#        authToken: ${{ secrets.GITHUB_TOKEN }}
-#        state: ${{ steps.summary.outputs.summary }}
-#        context: Terraform Plan
-#        description: Terraform Plan Summary
-#        sha: ${{ github.event.pull_request.head.sha }}
+    - name: Publish plan as a status
+      if: github.event_name == 'pull_request'
+      uses: Sibz/github-status-action@v1.1.6
+      with:
+        authToken: ${{ secrets.GITHUB_TOKEN }}
+        state: ${{ steps.summary.outputs.summary }}
+        context: Terraform Plan
+        description: Terraform Plan Summary
+        sha: ${{ github.event.pull_request.head.sha }}
 
   apply:
     name: Terraform apply
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: [ plan ]
     runs-on: ubuntu-latest
-#   environment: dev
+    environment: dev
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
@@ -227,12 +225,12 @@ jobs:
       if: always()
       run: cat summary.md >> $GITHUB_STEP_SUMMARY
 
-#    - name: Publish apply as a status
-#      if: github.event_name == 'pull_request'
-#      uses: Sibz/github-status-action@v1.1.6
-#      with:
-#        authToken: ${{ secrets.GITHUB_TOKEN }}
-#        state: ${{ steps.summary.outputs.summary }}
-#        context: Terraform Plan
-#        description: Terraform Plan Summary
-#        sha: ${{ github.event.pull_request.head.sha }}
+    - name: Publish apply as a status
+      if: github.event_name == 'pull_request'
+      uses: Sibz/github-status-action@v1.1.6
+      with:
+        authToken: ${{ secrets.GITHUB_TOKEN }}
+        state: ${{ steps.summary.outputs.summary }}
+        context: Terraform Plan
+        description: Terraform Plan Summary
+        sha: ${{ github.event.pull_request.head.sha }}
